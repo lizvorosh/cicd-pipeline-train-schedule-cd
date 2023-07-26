@@ -8,5 +8,14 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        stage('Deploytostage'){
+            when{
+                branch 'master'
+            }
+            steps{
+                withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD' )])
+            }
+        }    
     }
+    
 }
